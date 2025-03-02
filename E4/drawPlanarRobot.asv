@@ -1,0 +1,22 @@
+function [] = drawPlanarRobot(links, joints)
+    % disegna un robot planare note la lunghezza dei link e l'angolo dei 
+    % giunti
+
+    x = 0;
+    y = 0;
+    joint = 0;
+    N = size(links, 2);
+    for i= 1:N
+        hold on
+        joint = joint + joints(i);
+        deltaX = links(i)*cos(joint);
+        deltaY = links(i)*sin(joint);
+        plot([x, x+deltaX], [y, y+deltaY], 'b-', 'LineWidth', 2);
+        x = x+deltaX;
+        y = y+deltaY;
+    end
+
+    ee1 = [x+0.1, y+0.1];
+    ee2 = [x-0.1, y-0.1];
+    plot([ee1(1), ee2(1)], [ee1(2), ee2(2)], 'b-', 'LineWidth', 2);
+end
